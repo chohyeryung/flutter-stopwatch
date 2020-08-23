@@ -30,7 +30,7 @@ class _StopWatchPageState extends State<StopWatchPage> {
   var _time=0;  //0.01초마다 1씩 증가시킬 정수형 변수
   var _isRunning=false; //현재 시작 상태를 나타낼 불리언 변수
 
-  List<String> _lapTime=[];
+  List<String> _lapTimes=[];
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ Widget _buildBody(){
               bottom:10,
               child:FloatingActionButton(
                 backgroundColor:Colors.deepOrange,
-                onPressed:(){},
+                onPressed:_reset,
                 child:Icon(Icons.rotate_left),
               ),
             ),
@@ -128,6 +128,14 @@ Widget _buildBody(){
     _timer?.cancel();
   }
 
+  void _reset(){
+    setState(() {
+      _isRunning=false;
+      _timer?.cancel();
+      _lapTimes.clear();
+      _time=0;
+    });
+  }
   @override
   void dispose(){
     _timer?.cancel();
