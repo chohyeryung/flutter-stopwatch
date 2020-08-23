@@ -69,10 +69,10 @@ Widget _buildBody(){
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children:<Widget>[
                     Text(
-                      '0',
+                      '$sec',
                       style:TextStyle(fontSize: 50.0),
                     ),
-                    Text('00'),
+                    Text('$hundredth'),
                   ],
                 ),
                 Container(
