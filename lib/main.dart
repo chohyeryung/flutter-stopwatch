@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 void main() {
   runApp(MyApp());
@@ -24,6 +25,13 @@ class StopWatchPage extends StatefulWidget {
 }
 
 class _StopWatchPageState extends State<StopWatchPage> {
+  Timer _timer;  //타이머
+
+  var _time=0;  //0.01초마다 1씩 증가시킬 정수형 변수
+  var _isRunning=false; //현재 시작 상태를 나타낼 불리언 변수
+
+  List<String> _lapTime=[];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,14 +46,14 @@ class _StopWatchPageState extends State<StopWatchPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => setState((){
-          _clickBotton();
+          _clickButton();
         }),
-        child:Icon(Icons.play_arrow),
+        child:_isRunning ? Icon(Icons.pause) : Icon(Icons.play_arrow),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
-}
+
 Widget _buildBody(){
   return Center(
     child:Padding(
@@ -97,5 +105,30 @@ Widget _buildBody(){
   );
 }
 
-class _clickBotton {
+  void _clickButton() {
+    _isRunning =!_isRunning;
+
+    if(_isRunning){
+      _start();
+    }else{
+      _pause();
+    }
+  }
+
+  _start(){
+    _timer=Timer.periodic(Duration(milliseconds: 10), (timer) {
+      setState(() {
+        _time++;
+      });
+    });
+  }
+  _pause(){
+    _timer?.cancel();
+  }
+
+  @override
+  void dispose(){
+    _timer?.cancel();
+    super.dispose();
+  }
 }
