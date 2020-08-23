@@ -97,7 +97,11 @@ Widget _buildBody(){
               right:10,
               bottom:10,
               child:RaisedButton(
-                onPressed:(){},
+                onPressed:(){
+                  setState(() {
+                    _recordLapTime('$sec.$hundredth');
+                  });
+                },
                 child:Text('랩타임'),
               ),
             )
@@ -135,6 +139,9 @@ Widget _buildBody(){
       _lapTimes.clear();
       _time=0;
     });
+  }
+  void _recordLapTime(String time){
+    _lapTimes.insert(0, '${_lapTimes.length+1}등 $time');
   }
   @override
   void dispose(){
