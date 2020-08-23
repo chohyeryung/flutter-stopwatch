@@ -55,54 +55,56 @@ class _StopWatchPageState extends State<StopWatchPage> {
   }
 
 Widget _buildBody(){
-  return Center(
-    child:Padding(
-      padding: const EdgeInsets.only(top:30),
-      child:Stack(
-        children: <Widget>[
-          Column(
-            children:<Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children:<Widget>[
-                  Text(
-                    '0',
-                    style:TextStyle(fontSize: 50.0),
-                  ),
-                  Text('00'),
-                ],
-              ),
-              Container(
-                width:100,
-                height:200,
-                child:ListView(
-                  children:<Widget>[],
+    var sec=_time~/100;
+    var hundredth='${_time%100}'.padLeft(2, '0');
+    return Center(
+      child:Padding(
+        padding: const EdgeInsets.only(top:30),
+        child:Stack(
+          children: <Widget>[
+            Column(
+              children:<Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children:<Widget>[
+                    Text(
+                      '0',
+                      style:TextStyle(fontSize: 50.0),
+                    ),
+                    Text('00'),
+                  ],
                 ),
-              )
-            ],
-          ),
-          Positioned(
-            left:10,
-            bottom:10,
-            child:FloatingActionButton(
-              backgroundColor:Colors.deepOrange,
-              onPressed:(){},
-              child:Icon(Icons.rotate_left),
+                Container(
+                  width:100,
+                  height:200,
+                  child:ListView(
+                    children:<Widget>[],
+                  ),
+                )
+              ],
             ),
-          ),
-          Positioned(
-            right:10,
-            bottom:10,
-            child:RaisedButton(
-              onPressed:(){},
-              child:Text('랩타임'),
+            Positioned(
+              left:10,
+              bottom:10,
+              child:FloatingActionButton(
+                backgroundColor:Colors.deepOrange,
+                onPressed:(){},
+                child:Icon(Icons.rotate_left),
+              ),
             ),
-          )
-        ],
+            Positioned(
+              right:10,
+              bottom:10,
+              child:RaisedButton(
+                onPressed:(){},
+                child:Text('랩타임'),
+              ),
+            )
+          ],
+        ),
       ),
-    ),
-  );
+    );
 }
 
   void _clickButton() {
